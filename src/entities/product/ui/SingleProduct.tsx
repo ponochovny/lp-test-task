@@ -36,7 +36,7 @@ const SingleProduct = ({ id }: { id: string }) => {
 
 	return (
 		<div className='max-w-7xl mx-auto'>
-			<div className='relative h-60 my-2 w-full bg-white'>
+			<div className='relative h-60 my-2 w-full bg-white rounded-[8px]'>
 				<Image
 					src={data.image}
 					alt='Product Image'
