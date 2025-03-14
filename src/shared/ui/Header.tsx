@@ -12,7 +12,7 @@ const Header = () => {
 				href='/'
 				className={cn(pathname === '/' ? '' : 'text-gray-300', 'text-2xl')}
 			>
-				Home
+				{pathname === '/' ? 'Home' : 'Back to Home'}
 			</Link>
 		</div>
 	)

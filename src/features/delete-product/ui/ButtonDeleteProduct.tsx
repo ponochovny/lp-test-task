@@ -29,7 +29,7 @@ function ButtonDeleteProduct({ product }: { product: IProduct }) {
 		<Dialog>
 			<DialogTrigger asChild>
 				<button type='button'>
-					<Trash2 className='dark:text-gray-800 hover:dark:text-red-400 w-6' />
+					<Trash2 className='opacity-60 hover:opacity-100 dark:text-[#bcbcbc] hover:dark:text-red-400 w-4' />
 				</button>
 			</DialogTrigger>
 			<DialogContent className='sm:max-w-md'>

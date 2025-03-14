@@ -1,7 +1,8 @@
 'use client'
-import { ProductTitle, fetchProducts } from '@/src/entities/product'
+import { fetchProducts, IProduct } from '@/src/entities/product'
+import CardWrapper from '@/src/entities/product/ui/CardWrapper'
+import ProductCard from '@/src/entities/product/ui/ProductCard'
 import { ButtonDeleteProduct } from '@/src/features/delete-product'
-import H3 from '@/src/shared/ui/h3'
 import { Skeleton } from '@/src/shared/ui/skeleton'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
@@ -18,6 +19,10 @@ const loadingState = () => (
 	</div>
 )
 
+const renderControls = ({ product }: { product: IProduct }) => {
+	return <ButtonDeleteProduct product={product} />
+}
+
 const ProductList = () => {
 	const { isPending, error, data, isFetching } = useQuery({
 		queryKey: ['products'],
@@ -31,14 +36,20 @@ const ProductList = () => {
 
 	return (
 		<div>
-			<H3>Products:</H3>
-			<ul className='space-y-2'>
+			<ul className='grid grid-cols-2 gap-x-4 gap-y-2'>
 				{data.map((product) => (
 					<li className='flex gap-1' key={product.id}>
-						<Link href={`/product/${product.id}`} className='flex gap-1'>
-							<ProductTitle product={product} />
-						</Link>
-						<ButtonDeleteProduct product={product} />
+						<CardWrapper
+							renderControls={renderControls({ product })}
+							title='Product'
+						>
+							<Link
+								href={`/product/${product.id}`}
+								className='flex gap-1 w-full grow'
+							>
+								<ProductCard product={product} />
+							</Link>
+						</CardWrapper>
 					</li>
 				))}
 			</ul>

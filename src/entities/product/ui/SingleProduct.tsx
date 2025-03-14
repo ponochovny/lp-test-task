@@ -2,9 +2,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '@/src/shared/ui/skeleton'
 import type { IProduct } from '../model/product.types'
-import H3 from '@/src/shared/ui/h3'
 import { ButtonEditProduct } from '@/src/features/edit-product'
 import Image from 'next/image'
+import Rating from '@/src/shared/ui/rating'
 
 const fetchData = async (id: string): Promise<IProduct> => {
 	const response = await fetch(`https://fakestoreapi.com/products/${id}`)
@@ -36,16 +36,7 @@ const SingleProduct = ({ id }: { id: string }) => {
 
 	return (
 		<div>
-			<H3>{data.title}</H3>
-			<p>{data.description}</p>
-			<small className='text-gray-400'>
-				<span>Price: {data.price}</span>
-				{' | '}
-				<span>Category: {data.category}</span>
-				{' | '}
-				<span>Rating: {data.rating?.rate}</span>
-			</small>
-			<div className='relative w-30 h-30 my-2'>
+			<div className='relative h-60 my-2 w-full bg-white'>
 				<Image
 					src={data.image}
 					alt='Product Image'
@@ -54,7 +45,23 @@ const SingleProduct = ({ id }: { id: string }) => {
 					style={{ objectFit: 'contain' }}
 				/>
 			</div>
-			<div className='border-t-1 mt-2 pt-2 flex gap-1'>
+			<div className='flex gap-1 items-center w-full'>
+				<span className='uppercase text-[#3397F7] font-semibold text-sm'>
+					{data.category}
+				</span>
+				<span
+					className='text-gray-300 text-sm'
+					style={{ textShadow: '1px 1px 2px #3f3f3f' }}
+				>
+					- {data.price + '$'}
+				</span>
+				<Rating rate={data.rating?.rate || 0} className='ml-auto' />
+			</div>
+			<h1 className='text-2xl font-light'>{data.title}</h1>
+			<div className='shadow-lg rounded-full w-full shadow-gray-300/30 h-3 mb-6'></div>
+			<p className='text-gray-300 text-sm'>{data.description}</p>
+			<div className='shadow-lg rounded-full w-full shadow-gray-300/30 h-3 mt-10 transform rotate-180'></div>
+			<div className='pt-2 flex gap-1'>
 				<ButtonEditProduct product={data} />
 			</div>
 		</div>
