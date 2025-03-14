@@ -35,7 +35,7 @@ const SingleProduct = ({ id }: { id: string }) => {
 	if (error) return 'An error has occurred: ' + error.message
 
 	return (
-		<div>
+		<div className='max-w-7xl mx-auto'>
 			<div className='relative h-60 my-2 w-full bg-white'>
 				<Image
 					src={data.image}
